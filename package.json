@@ -4,7 +4,8 @@
   "description": "message app",
   "main": "app.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "start": "nodemon ./wazzBackend/app.js"
   },
   "repository": {
     "type": "git",
@@ -17,6 +18,10 @@
   },
   "homepage": "https://github.com/aviad2342/wazzBackend#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongoose": "^5.12.13"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
   }
 }
