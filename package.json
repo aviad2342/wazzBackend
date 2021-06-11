@@ -1,0 +1,22 @@
+{
+  "name": "wazzbackend",
+  "version": "1.0.0",
+  "description": "message app",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aviad2342/wazzupBackend.git"
+  },
+  "author": "aviad",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aviad2342/wazzupBackend/issues"
+  },
+  "homepage": "https://github.com/aviad2342/wazzupBackend#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
+}
