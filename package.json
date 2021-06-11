@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/aviad2342/wazzupBackend.git"
+    "url": "git+https://github.com/aviad2342/wazzBackend.git"
   },
   "author": "aviad",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/aviad2342/wazzupBackend/issues"
+    "url": "https://github.com/aviad2342/wazzBackend/issues"
   },
-  "homepage": "https://github.com/aviad2342/wazzupBackend#readme",
+  "homepage": "https://github.com/aviad2342/wazzBackend#readme",
   "dependencies": {
     "express": "^4.17.1"
   }
