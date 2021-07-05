@@ -9,6 +9,8 @@ const port = 8000;
 
 
 const userRoutes = require("./routes/user");
+const chatRoutes = require("./routes/chat");
+const messageRoutes = require("./routes/message");
 //mongodb+srv://aviad:<password>@wazzup.xq4vf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 mongoose.connect("mongodb+srv://aviad:aviad2342@wazzup.xq4vf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {useNewUrlParser: true, useUnifiedTopology: true})
 .then(() => {
@@ -31,6 +33,8 @@ app.use((req, res, next) => {
 
 
 app.use("/api/user", userRoutes);
+app.use("/api/chat", chatRoutes);
+app.use("/api/message", messageRoutes);
 
 app.get('/', (req, res) => {
   res.send('Hello World!')

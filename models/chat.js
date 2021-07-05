@@ -1,14 +1,20 @@
 const mongoose = require('mongoose');
-const message = require('./message');
-const user = require('./user');
+const User = require('./user');
+const Message = require('./message');
+const { ObjectId } = require('bson');
+
 // const uniqueValidator = require('mongoose-unique-validator');
 
 
 const chatSchema = mongoose.Schema({
   id : { type: String, required: true, unique: true },
-  users: user[],
-  userImage: { type: String, required: true },
-  messages: message[]
+  users: [String],
+  messages: [{
+    fromUser: { type: String, required: true },
+    toUser: { type: String, required: true },
+    date: { type: Date, default: new Date()},
+    body: { type: String }
+  }]
 });
 
 // userSchema.plugin(uniqueValidator);
