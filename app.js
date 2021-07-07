@@ -9,6 +9,7 @@ const port = 8000;
 
 
 const userRoutes = require("./routes/user");
+const authRoutes = require("./routes/auth");
 const chatRoutes = require("./routes/chat");
 const messageRoutes = require("./routes/message");
 //mongodb+srv://aviad:<password>@wazzup.xq4vf.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
@@ -33,6 +34,7 @@ app.use((req, res, next) => {
 
 
 app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/message", messageRoutes);
 

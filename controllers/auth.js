@@ -6,6 +6,7 @@ const User = require("../models/user");
 exports.userLogin = (req, res, next) => {
   let fetchdUser;
   User.findOne({ phone: req.body.phone }).then(user => {
+    
     if (!user) {
       return res.status(401).json({
         message: "Auth failed"
@@ -24,10 +25,8 @@ exports.userLogin = (req, res, next) => {
         message: "Auth failed"
       });
     }
-    const token = jwt.sign({phone: fetchdUser.phone, id: fetchdUser._id},
-      process.env.JWT_KEY,
-      { expiresIn: "1h" }
-      );
+    
+    const token = jwt.sign({phone: fetchdUser.phone, name: fetchdUser.name},  'secret', { expiresIn: "1h" } );
       res.status(200).json({
         token: token,
         expiresIn: 3600,
@@ -37,9 +36,10 @@ exports.userLogin = (req, res, next) => {
         userImage: fetchdUser.userImage,
         is_active: fetchdUser.is_active
       });
+      
   }).catch(err => {
     return res.status(401).json({
-      message: "Invalid authentication credentials!"
+      message: "Invalid authentication credentials!" + err
     });
   });
 }
