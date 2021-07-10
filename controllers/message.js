@@ -1,5 +1,4 @@
-const { io } = require('../app');
-
+const Message = require("../models/message");
 
 exports.createMessage = (req, res, next) => {
   const url = req.protocol + '://' + req.get("host");
