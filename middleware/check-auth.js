@@ -1,12 +1,28 @@
 const jwt = require("jsonwebtoken");
 
 module.exports = (req, res, next) => {
-  try {
-    const token = req.headers.authorization.split(" ")[1];
-    const decodedToken = jwt.verify(token, process.env.JWT_KEY);
-    req.userData = { phone: decodedToken.phone, userId: decodedToken.userId };
-    next();
-  } catch (error) {
-    res.status(401).json({ message: "You are not authenticated!" });
+  const authHeader = req.get('Authorization');
+  if (!authHeader) {
+    req.isAuth = false;
+    return next();
   }
+  const token = authHeader.split(' ')[1];
+  if (!token || token === '') {
+    req.isAuth = false;
+    return next();
+  }
+  let decodedToken;
+  try {
+    decodedToken = jwt.verify(token, 'somesupersecretkey');
+  } catch (err) {
+    req.isAuth = false;
+    return next();
+  }
+  if (!decodedToken) {
+    req.isAuth = false;
+    return next();
+  }
+  req.isAuth = true;
+  req.userId = decodedToken.userId;
+  next();
 };

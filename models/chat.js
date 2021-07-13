@@ -8,20 +8,20 @@ const Schema = mongoose.Schema;
 
 const chatSchema = mongoose.Schema({
   id : { type: String, required: true, unique: true },
-  from: { 
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true 
-  },
-  to: { 
-    type: Schema.Types.ObjectId,
-    ref: 'User',
-    required: true 
-  },
+  // from: { 
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   required: true 
+  // },
+  // to: { 
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'User',
+  //   required: true 
+  // },
   messages: [{
     type: Schema.Types.ObjectId,
     ref: 'Message',
-    required: true 
+    default: []
   }]
 });
 
