@@ -4,11 +4,16 @@ const cors = require('cors');
 const schema = require('./schema/schema');
 const expressGraphQL = require('express-graphql').graphqlHTTP;
 const app = express();
+const { ApolloServer, graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+const { execute, subscribe } = require('graphql');
+const { PubSub } = require('graphql-subscriptions');
+const { SubscriptionServer } = require('subscriptions-transport-ws');
 const http = require("http").createServer(app);
 // const socket = require('socket.io');
 const mongoose = require("mongoose");
 const port = 8000;
 
+const { makeExecutableSchema } = require('@graphql-tools/schema');
 const graphQlSchema = require('./graphql/schema/index');
 const graphQlResolvers = require('./graphql/resolvers/index');
 
@@ -38,6 +43,37 @@ app.use((req, res, next) => {
   next();
 });
 
+// const pubsub = new PubSub();
+
+// const NEW_MESSAGE = "NEW_MESSAGE";
+
+// const resolvers = {
+//   Subscription: {
+//     messageAdded: {
+//       subscribe: (_, __, { pubsub }) => pubsub.asyncIterator(NEW_MESSAGE)
+//     }
+//   }
+// }
+
+// const apolloServer = new ApolloServer(
+//   { 
+//     schema,
+//     resolvers,
+//     context:({req, res}) => ({req, res, pubsub})
+//    }
+//   );
+
+  // const as  = new ApolloServer({
+  //   schema,
+  // });
+  // await as.start();
+  // as.applyMiddleware({ app });
+
+// apolloServer.applyMiddleware({ app });
+
+
+
+
 app.use('/graphql', expressGraphQL({
   schema: graphQlSchema,
   rootValue: graphQlResolvers,
@@ -53,9 +89,34 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 });
 
+// app.use('/graphiql', expressGraphQL({
+//   endpointURL: '/graphql',
+//   subscriptionsEndpoint: `ws://localhost:8000/subscriptions`
+// }));
+
+  // SubscriptionServer.create(
+  //   { schema, execute, subscribe },
+  //   { server: httpServer, path: server.graphqlPath }
+  // );
+// const ws = http;
+
+// ws.listen(port, () => {
+//   console.log(`Apollo Server is now running on http://localhost:${port}`);
+//   // Set up the WebSocket for handling GraphQL subscriptions
+//   new SubscriptionServer({
+//     execute,
+//     subscribe,
+//     schema
+//   }, {
+//     server: ws,
+//     path: '/subscriptions',
+//   });
+// });
+
 const server = app.listen(port, async () => {
-  console.log(`Example app listening on port ${port}!`)
+  console.log(`Example app listening on port ${port}!`);
 });
+
 
 // const io = socket(server, {
 //   cors: {

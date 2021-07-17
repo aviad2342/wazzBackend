@@ -57,25 +57,38 @@ input UserInput {
   avatar: String!
 }
 
+type Subscription {
+  messageAdded: String
+}
+
+
 type RootQuery {
     chats: [Chat!]!
+    chat(chatId: String!): Chat
     messages: [Message!]!
+    message(messageId: ID!): Message
+    chatMessages(messageIds:[ID!]): [Message!]!
     users: [User!]!
+    userById(userId: ID!): User
+    user(userPhone: String!): User
     login(phone: String!, userName: String!): AuthData!
 }
 
 type RootMutation {
     createMessage(messageInput: MessageInput): Message
     createUser(userInput: UserInput): User
-    createChat(chatInput: ChatInput): Chat
-    chat(chatId: String!): Chat
+    createChat(chatId: String!): Chat
     message(mesageId: String!): Message!
-    user(userPhone: String!): User!
     newMessage(newMessageInput: NewMessageInput): Message!
+}
+
+type RootSubscription {
+  messageAdded: Subscription
 }
 
 schema {
     query: RootQuery
     mutation: RootMutation
+    subscription: RootSubscription
 }
 `);

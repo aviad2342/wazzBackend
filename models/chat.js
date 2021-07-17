@@ -8,22 +8,17 @@ const Schema = mongoose.Schema;
 
 const chatSchema = mongoose.Schema({
   id : { type: String, required: true, unique: true },
-  // from: { 
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User',
-  //   required: true 
-  // },
-  // to: { 
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User',
-  //   required: true 
-  // },
+  // users: [String],
   messages: [{
     type: Schema.Types.ObjectId,
     ref: 'Message',
     default: []
   }]
 });
+
+// chatSchema.index({
+//   users: 1
+// })
 
 
 module.exports = mongoose.model("Chat", chatSchema);
